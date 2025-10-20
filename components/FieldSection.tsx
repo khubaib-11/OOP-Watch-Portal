@@ -7,14 +7,14 @@ function FieldSection({
   section: string;
   inputFields: {
     label: string;
-    value: string;
+    value: string | number;
     locked: boolean;
     editUrl: string;
   }[];
 }) {
   return (
     <div key={section}>
-      <h1 className="text-xl font-medium mb-8">{section}</h1>
+      <h1 className="text-xl font-medium my-8">{section}</h1>
       {inputFields.map((i) => (
         <FieldList
           key={i.label}

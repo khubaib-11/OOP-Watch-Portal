@@ -1,22 +1,21 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useUpdateEmail } from "@/hooks/useProfileScreenData";
-import { zodResolver } from "@hookform/resolvers/zod";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useUpdateAge } from "@/hooks/useProfileScreenData";
+import { toast } from "sonner";
 
 const schema = z.object({
-  email: z.string().email({
-    message: "Please provide a valid email address",
-  }),
+  age: z.string(),
 });
 
-type EmailSchema = z.infer<typeof schema>;
+type AgeSchema = z.infer<typeof schema>;
 
-function EditEmailPage() {
-  const { mutate, data, error } = useUpdateEmail();
+function EditAge() {
+  const { mutate, data, error } = useUpdateAge();
   const {
     register,
     handleSubmit,
@@ -25,32 +24,31 @@ function EditEmailPage() {
     resolver: zodResolver(schema),
   });
 
-  function onClickUpdate(data: EmailSchema) {
-    mutate(data.email);
+  function onClickUpdate(data: AgeSchema) {
+    mutate(String(data.age));
   }
 
   if (data) {
-    toast("Email updated successfully.");
-    // router.back();
+    toast("Age updated successfully.");
   }
   if (error) {
-    toast("Failed to updated full name.");
+    toast("Failed to updated age.");
   }
 
   return (
     <div className=" max-w-[350px] mt-8 flex-col flex-1 ">
-      <h1 className="text-2xl font-semibold mb-2">Email</h1>
-      <p>You can update your email here</p>
+      <h1 className="text-2xl font-semibold mb-2">Age</h1>
+      <p>You can update your age here</p>
       <div className="flex flex-col gap-2 mt-2">
-        <label>Email</label>
+        <label>Full Name</label>
         <Input
           className="bg-gray-50"
-          type="text"
-          {...register("email")}
+          type="number"
+          {...register("age")}
         />
         {errors ? (
           <p className="text-red-500 font-medium mb-2 mt-1">
-            {errors.email?.message}
+            {errors.age?.message}
           </p>
         ) : null}
       </div>
@@ -65,4 +63,4 @@ function EditEmailPage() {
   );
 }
 
-export default EditEmailPage;
+export default EditAge;

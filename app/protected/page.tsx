@@ -10,6 +10,8 @@ export default async function ProtectedPage() {
     redirect("/auth/login");
   }
 
+  redirect("/protected/dashboard/profile");
+
   return (
     <div className="flex-1 w-full flex flex-col gap-12">Dashboard Page</div>
   );

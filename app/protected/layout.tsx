@@ -1,5 +1,8 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import SideBar from "@/components/SideBar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 export default function ProtectedLayout({
   children,
@@ -7,14 +10,16 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="min-h-screen flex flex-col ">
-      <Navbar />
-      <div className="flex flex-row">
-        <SideBar />
-        <div className="flex flex-col gap-20 max-w-5xl p-5 flex-1">
-          {children}
+    <QueryClientProvider client={queryClient}>
+      <main className="min-h-screen flex flex-col ">
+        <Navbar />
+        <div className="flex flex-row">
+          <SideBar />
+          <div className="flex flex-col gap-20 max-w-5xl p-5 flex-1">
+            {children}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </QueryClientProvider>
   );
 }

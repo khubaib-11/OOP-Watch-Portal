@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -25,7 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -33,7 +37,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <main>{children}</main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

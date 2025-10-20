@@ -8,7 +8,7 @@ function FieldList({
   editUrl,
 }: {
   label: string;
-  value: string;
+  value: string | number;
   locked: boolean;
   editUrl: string;
 }) {
@@ -22,7 +22,8 @@ function FieldList({
       >
         <div>
           <p className="font-medium my-2">{label}</p>
-          <p>{value}</p>
+          {/* //! Converting the value to string if the coming value is number or anything else. */}
+          <p>{String(value)}</p>
         </div>
         {locked ? (
           <LockIcon className="w-6 h-6" />
