@@ -2,6 +2,7 @@
 import FieldSection from "@/components/FieldSection";
 import ProfilePicture from "@/components/ProfilePicture";
 import { useProfileScreenData } from "@/hooks/useProfileScreenData";
+import { Spinner } from "@/components/ui/spinner";
 
 const PAGE_BASE_URL = "/protected/dashboard/profile/edit";
 function ProfileScreen() {
@@ -68,7 +69,12 @@ function ProfileScreen() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className=" flex flex-col gap-4 flex-1 justify-center items-center">
+        <Spinner />
+        <p>Loading...</p>
+      </div>
+    );
   }
   if (error) {
     return <p>{data?.error?.message}</p>;

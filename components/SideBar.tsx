@@ -10,6 +10,10 @@ const SIDE_BAR_LINKS = [
     url: "/protected/dashboard/profile",
   },
   {
+    name: "Professional details",
+    url: "/protected/dashboard/professional-details",
+  },
+  {
     name: "Settings",
     url: "/protected/dashboard/settings",
   },

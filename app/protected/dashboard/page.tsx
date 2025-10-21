@@ -7,7 +7,7 @@ import React from "react";
 function page() {
   redirect("/protected/dashboard/profile");
 
-  return <div>Dashboard page</div>;
+  return <div>Protected Page page</div>;
 }
 
 export default page;
