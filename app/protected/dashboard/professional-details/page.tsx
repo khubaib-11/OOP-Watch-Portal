@@ -29,26 +29,26 @@ function ProfessionalDetailsScreen() {
           },
         ],
       },
-      {
-        section: "Core skills",
-        inputFields: [
-          {
-            label: "Skills & Skills Level (e.g., Python - Advanced)",
-            // After fetching data, fill below and other values
-            value: data?.professionalDetails[0].age ?? "Not provided",
-            // Locked means this input should show lock icon and is not click able
-            locked: true,
-            editUrl: `${PAGE_BASE_URL}/editAge`,
-          },
-          {
-            label: "Languages Skills (e.g., Urdu - Fluent)",
-            // After fetching data, fill below and other values
-            value: data?.professionalDetails[0].gender ?? "Not provided",
-            locked: true,
-            editUrl: `${PAGE_BASE_URL}/editGender`,
-          },
-        ],
-      },
+      // {
+      //   section: "Core skills",
+      //   inputFields: [
+      //     {
+      //       label: "Skills & Skills Level (e.g., Python - Advanced)",
+      //       // After fetching data, fill below and other values
+      //       value: data?.professionalDetails[0].age ?? "Not provided",
+      //       // Locked means this input should show lock icon and is not click able
+      //       locked: true,
+      //       editUrl: `${PAGE_BASE_URL}/editAge`,
+      //     },
+      //     {
+      //       label: "Languages Skills (e.g., Urdu - Fluent)",
+      //       // After fetching data, fill below and other values
+      //       value: data?.professionalDetails[0].gender ?? "Not provided",
+      //       locked: true,
+      //       editUrl: `${PAGE_BASE_URL}/editGender`,
+      //     },
+      //   ],
+      // },
     ];
   }
 
