@@ -14,6 +14,10 @@ const SIDE_BAR_LINKS = [
     url: "/protected/dashboard/professional-details",
   },
   {
+    name: "Tasks & Teams",
+    url: "/protected/dashboard/tasksAndTeams",
+  },
+  {
     name: "Settings",
     url: "/protected/dashboard/settings",
   },
