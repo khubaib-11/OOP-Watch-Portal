@@ -13,21 +13,21 @@ function TasksAndTeamsScreen() {
       {
         section: "Engagement",
         inputFields: [
-          {
-            label: "Teams",
-            // After fetching data, fill below and other values
-            value: data?.teamsAndTasks[0].teams ?? "Not provided",
-            // Locked means this input should show lock icon and is not click able
-            locked: true,
-            editUrl: `${PAGE_BASE_URL}/editTeams`,
-          },
-          {
-            label: "Current Tasks",
-            // After fetching data, fill below and other values
-            value: data?.teamsAndTasks[0].email ?? "Not provided",
-            locked: true,
-            editUrl: `${PAGE_BASE_URL}/editTasks`,
-          },
+          // {
+          //   label: "Teams",
+          //   // After fetching data, fill below and other values
+          //   value: data?.teamsAndTasks[0].user_teams ?? "Not provided",
+          //   // Locked means this input should show lock icon and is not click able
+          //   locked: true,
+          //   editUrl: `${PAGE_BASE_URL}/editTeams`,
+          // },
+          // {
+          //   label: "Current Tasks",
+          //   // After fetching data, fill below and other values
+          //   value: data?.teamsAndTasks[0].user_teams ?? "Not provided",
+          //   locked: true,
+          //   editUrl: `${PAGE_BASE_URL}/editTasks`,
+          // },
           {
             label: "Motivation",
             // After fetching data, fill below and other values

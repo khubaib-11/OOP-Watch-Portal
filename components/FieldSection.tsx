@@ -7,7 +7,7 @@ function FieldSection({
   section: string;
   inputFields: {
     label: string;
-    value: string | number;
+    value: string | number | boolean;
     locked: boolean;
     editUrl: string;
   }[];

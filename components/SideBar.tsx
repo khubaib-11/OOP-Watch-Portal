@@ -27,7 +27,7 @@ function SideBar() {
   const pathName = usePathname();
 
   return (
-    <div className=" w-[250px] h-screen pt-4 border-r px-2 flex flex-col gap-4">
+    <div className=" w-[250px] h-screen pt-4 border-r px-2 md:flex flex-col gap-4 hidden ">
       {SIDE_BAR_LINKS.map((l) => (
         <Link
           href={l.url}

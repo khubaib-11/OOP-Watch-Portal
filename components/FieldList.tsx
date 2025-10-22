@@ -8,7 +8,7 @@ function FieldList({
   editUrl,
 }: {
   label: string;
-  value: string | number;
+  value: string | number | boolean;
   locked: boolean;
   editUrl: string;
 }) {
@@ -17,7 +17,9 @@ function FieldList({
       <div
         key={label}
         className={`flex justify-between items-center border-b py-4 px-4  hover:bg-gray-200 cursor-pointer ${
-          locked ? "bg-gray-100 hover:bg-gray-100 cursor-not-allowed" : ""
+          locked
+            ? "bg-gray-100 dark:bg-neutral-700 hover:bg-gray-100 cursor-not-allowed"
+            : ""
         }`}
       >
         <div>
