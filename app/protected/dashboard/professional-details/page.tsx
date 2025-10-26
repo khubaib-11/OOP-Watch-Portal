@@ -54,7 +54,7 @@ function ProfessionalDetailsScreen() {
 
   if (isLoading) {
     return (
-      <div className=" flex flex-col gap-4 flex-1 justify-center items-center">
+      <div className=" flex flex-col gap-4  h-screen justify-center items-center ">
         <Spinner />
         <p>Loading...</p>
       </div>

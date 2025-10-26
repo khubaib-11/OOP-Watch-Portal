@@ -4,7 +4,7 @@ import ProfilePicture from "@/components/ProfilePicture";
 import { useProfileScreenData } from "@/hooks/useProfileScreenData";
 import { Spinner } from "@/components/ui/spinner";
 
-const PAGE_BASE_URL = "/protected/dashboard/profile/edit";
+const PAGE_BASE_URL = "/protected/dashboard/profile";
 function ProfileScreen() {
   const { data, isLoading, error } = useProfileScreenData();
   let profileUIStructure;
@@ -19,21 +19,21 @@ function ProfileScreen() {
             value: data?.profile[0].full_name ?? "Not provided",
             // Locked means this input should show lock icon and is not click able
             locked: false,
-            editUrl: `${PAGE_BASE_URL}/editFullName`,
+            editUrl: `${PAGE_BASE_URL}/edit/editFullName`,
           },
           {
             label: "Email",
             // After fetching data, fill below and other values
             value: data?.profile[0].email ?? "Not provided",
             locked: false,
-            editUrl: `${PAGE_BASE_URL}/editEmail`,
+            editUrl: `${PAGE_BASE_URL}/edit/editEmail`,
           },
           {
             label: "Phone Number",
             // After fetching data, fill below and other values
             value: data?.profile[0].phone ?? "Not provided",
             locked: false,
-            editUrl: `${PAGE_BASE_URL}/editPhone`,
+            editUrl: `${PAGE_BASE_URL}/edit/editPhone`,
           },
 
           {
@@ -41,7 +41,7 @@ function ProfileScreen() {
             // After fetching data, fill below and other values
             value: data?.profile[0].location ?? "Not provided",
             locked: false,
-            editUrl: `${PAGE_BASE_URL}/editLocation`,
+            editUrl: `${PAGE_BASE_URL}/edit/editLocation`,
           },
         ],
       },
@@ -54,14 +54,14 @@ function ProfileScreen() {
             value: data?.profile[0].age ?? "Not provided",
             // Locked means this input should show lock icon and is not click able
             locked: false,
-            editUrl: `${PAGE_BASE_URL}/editAge`,
+            editUrl: `${PAGE_BASE_URL}/edit/editAge`,
           },
           {
             label: "Gender",
             // After fetching data, fill below and other values
             value: data?.profile[0].gender ?? "Not provided",
             locked: false,
-            editUrl: `${PAGE_BASE_URL}/editGender`,
+            editUrl: `${PAGE_BASE_URL}/edit/editGender`,
           },
         ],
       },
@@ -70,7 +70,7 @@ function ProfileScreen() {
 
   if (isLoading) {
     return (
-      <div className=" flex flex-col gap-4 flex-1 justify-center items-center">
+      <div className=" flex flex-col gap-4  h-screen justify-center items-center ">
         <Spinner />
         <p>Loading...</p>
       </div>
@@ -84,7 +84,6 @@ function ProfileScreen() {
 
   return (
     <div className=" w-full h-screen">
-      {/* //! after fetching data pass the name to profile */}
       <ProfilePicture profileName="" />
       <div className="mt-8">
         {profileUIStructure?.map((p) => (

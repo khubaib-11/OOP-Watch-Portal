@@ -2,8 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { useUpdatePhone } from "@/hooks/useProfileScreenData";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -22,7 +25,8 @@ const schema = z.object({
 type PhoneSchema = z.infer<typeof schema>;
 
 function EditPhone() {
-  const { mutate, data, error } = useUpdatePhone();
+  const router = useRouter();
+  const { mutate, isSuccess, isError, isPending } = useUpdatePhone();
 
   const {
     register,
@@ -33,17 +37,19 @@ function EditPhone() {
   });
 
   function onClickUpdate(data: PhoneSchema) {
-    console.log(data);
     mutate(data.phone);
   }
 
-  if (data) {
-    toast("Phone number updated successfully.");
-    // router.back();
-  }
-  if (error) {
-    toast("Failed to updated phone number.");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast("Phone number updated successfully.");
+      router.back();
+    }
+
+    if (isError) {
+      toast("Failed to update phone number.");
+    }
+  }, [isSuccess, isError, router]);
 
   return (
     <div className=" max-w-[350px] mt-8 flex-col flex-1 ">
@@ -66,8 +72,9 @@ function EditPhone() {
         className="w-1/3"
         size="lg"
         onClick={handleSubmit(onClickUpdate)}
+        disabled={isPending}
       >
-        Update
+        {isPending ? <Spinner /> : "Update"}
       </Button>
     </div>
   );

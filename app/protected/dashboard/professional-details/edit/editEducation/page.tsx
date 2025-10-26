@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { useUpdateEducation } from "@/hooks/useProfessionalDetailsScreenData";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { toast } from "sonner";
 import z from "zod";
 
@@ -30,17 +31,18 @@ function EditEducationPage() {
   });
 
   function onClickUpdate(data: EducationSchema) {
-    console.log(data);
     mutate(data.education);
   }
 
-  if (isSuccess) {
-    toast("Education updated successfully.");
-    router.back();
-  }
-  if (isError) {
-    toast("Failed to updated education.");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast("Education updated successfully.");
+      router.back();
+    }
+    if (isError) {
+      toast("Failed to updated education.");
+    }
+  }, [isError, isSuccess, router]);
 
   return (
     <EditProfessionalDetailsInputWrapper

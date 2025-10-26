@@ -1,8 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Spinner } from "@/components/ui/spinner";
 import { useUpdateLocation } from "@/hooks/useProfileScreenData";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -10,14 +13,15 @@ import { z } from "zod";
 const schema = z.object({
   location: z
     .string()
-    .min(3, "Your name must have at least 3 characters")
-    .max(50, "Your name can not be longer than 25 characters"),
+    .min(3, "Your location must have at least 3 characters")
+    .max(50, "Your location can not be longer than 25 characters"),
 });
 
 type LocationSchema = z.infer<typeof schema>;
 
 function EditLocation() {
-  const { mutate, data, error } = useUpdateLocation();
+  const router = useRouter();
+  const { mutate, isSuccess, isError, isPending } = useUpdateLocation();
   const {
     register,
     handleSubmit,
@@ -30,12 +34,16 @@ function EditLocation() {
     mutate(data.location);
   }
 
-  if (data) {
-    toast("Location updated successfully.");
-  }
-  if (error) {
-    toast("Failed to updated location.");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast("Location updated successfully.");
+      router.back();
+    }
+
+    if (isError) {
+      toast("Failed to update location.");
+    }
+  }, [isSuccess, isError, router]);
 
   return (
     <div className=" max-w-[350px] mt-8 flex-col flex-1 ">
@@ -61,8 +69,9 @@ function EditLocation() {
         className="w-1/3"
         size="lg"
         onClick={handleSubmit(onClickUpdate)}
+        disabled={isPending}
       >
-        Update
+        {isPending ? <Spinner /> : "Update"}
       </Button>
     </div>
   );

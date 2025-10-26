@@ -156,13 +156,15 @@ function ProfilePicture({
           <span className="text-xs text-gray-500">{profileName}</span>
         </div>
       ) : (
-        <Image
-          src={profilePictureUrl}
-          width={64}
-          height={64}
-          alt="User avatar"
-          className="rounded-full"
-        />
+        <div className="rounded-full w-[64px] h-[64px] overflow-hidden">
+          <Image
+            src={profilePictureUrl}
+            width={64}
+            height={64}
+            alt="User avatar"
+            className="object-cover w-full h-full"
+          />
+        </div>
       )}
 
       {/* This input is hidden from the user but is required for file selection */}

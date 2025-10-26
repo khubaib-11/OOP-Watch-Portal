@@ -2,6 +2,7 @@
 import FieldSection from "@/components/FieldSection";
 import { Spinner } from "@/components/ui/spinner";
 import { useTeamsAndTasksScreenData } from "@/hooks/useTeamsAndTasks";
+import { BadgeInfo } from "lucide-react";
 
 const PAGE_BASE_URL = "/protected/dashboard/tasksAndTeams/edit";
 function TasksAndTeamsScreen() {
@@ -42,7 +43,7 @@ function TasksAndTeamsScreen() {
 
   if (isLoading) {
     return (
-      <div className=" flex flex-col gap-4 flex-1 justify-center items-center">
+      <div className=" flex flex-col gap-4  h-screen justify-center items-center ">
         <Spinner />
         <p>Loading...</p>
       </div>
@@ -56,6 +57,13 @@ function TasksAndTeamsScreen() {
 
   return (
     <div className=" w-full h-screen">
+      <div className="bg-purple-200 dark:bg-purple-800 px-4 py-2 flex flex-col justify-center items-center gap-4">
+        <BadgeInfo />
+        <p>
+          Teams and tasks feature is still in development. Once complete, we
+          will let you know, then you can see more fields here.
+        </p>
+      </div>
       <div className="mt-8">
         {profileUIStructure?.map((p) => (
           <FieldSection

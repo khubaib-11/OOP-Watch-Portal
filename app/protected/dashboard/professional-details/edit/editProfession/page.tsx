@@ -8,6 +8,7 @@ import { useUpdateProfession } from "@/hooks/useProfessionalDetailsScreenData";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import z from "zod";
+import { useEffect } from "react";
 
 const schema = z.object({
   profession: z
@@ -30,17 +31,18 @@ function EditEducationPage() {
   });
 
   function onClickUpdate(data: EducationSchema) {
-    console.log(data);
     mutate(data.profession);
   }
 
-  if (isSuccess) {
-    toast("Profession updated successfully.");
-    router.back();
-  }
-  if (isError) {
-    toast("Failed to updated profession.");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast("Profession updated successfully.");
+      router.back();
+    }
+    if (isError) {
+      toast("Failed to updated profession.");
+    }
+  }, [isError, isSuccess, router]);
 
   return (
     <EditProfessionalDetailsInputWrapper

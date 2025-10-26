@@ -1,13 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Spinner } from "@/components/ui/spinner";
 import { useUpdateUserName } from "@/hooks/useProfileScreenData";
-import { toast } from "sonner";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const schema = z.object({
   full_name: z
@@ -20,7 +21,7 @@ type FullNameSchema = z.infer<typeof schema>;
 
 function EditFullName() {
   const router = useRouter();
-  const { mutate, data, error } = useUpdateUserName();
+  const { mutate, isSuccess, isError, isPending } = useUpdateUserName();
   const {
     register,
     handleSubmit,
@@ -33,13 +34,16 @@ function EditFullName() {
     mutate(data.full_name);
   }
 
-  if (data) {
-    toast("Full name updated successfully.");
-    router.back();
-  }
-  if (error) {
-    toast("Failed to updated full name.");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast("Full name updated successfully.");
+      router.back();
+    }
+
+    if (isError) {
+      toast("Failed to update full name.");
+    }
+  }, [isSuccess, isError, router]);
 
   return (
     <div className=" max-w-[350px] mt-8 flex-col flex-1 ">
@@ -63,7 +67,7 @@ function EditFullName() {
         size="lg"
         onClick={handleSubmit(onClickUpdate)}
       >
-        Update
+        {isPending ? <Spinner /> : "Update"}
       </Button>
     </div>
   );

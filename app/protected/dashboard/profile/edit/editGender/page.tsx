@@ -8,28 +8,36 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { useUpdateGender } from "@/hooks/useProfileScreenData";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
 function EditGender() {
+  const router = useRouter();
   const [selectedGender, setSelectedGender] = useState<"Male" | "Female" | "">(
     ""
   );
-  const { mutate, isSuccess, isError } = useUpdateGender();
+  const { mutate, isSuccess, isError, isPending } = useUpdateGender();
 
   function onClickUpdate(g: "Male" | "Female" | "") {
     if (!g) return;
     mutate(g);
   }
-  if (isSuccess) {
-    toast("Gender updated successfully.");
-  }
-  if (isError) {
-    toast("Failed to updated gender.");
-  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast("Gender updated successfully.");
+      router.back();
+    }
+
+    if (isError) {
+      toast("Failed to update gender.");
+    }
+  }, [isSuccess, isError, router]);
 
   return (
     <div className=" max-w-[350px] mt-8 flex-col flex-1 ">
@@ -56,8 +64,9 @@ function EditGender() {
         className="w-1/3 mt-4"
         size="lg"
         onClick={() => onClickUpdate(selectedGender)}
+        disabled={isPending}
       >
-        Update
+        {isPending ? <Spinner /> : "Update"}
       </Button>
     </div>
   );
